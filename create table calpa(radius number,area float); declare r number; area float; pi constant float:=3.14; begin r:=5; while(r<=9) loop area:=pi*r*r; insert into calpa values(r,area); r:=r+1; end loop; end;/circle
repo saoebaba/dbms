@@ -1,0 +1,17 @@
+create table cal(radius number,area float);
+declare
+r number;
+area float;
+pi constant float:=3.14;
+begin
+r:=5;
+while(r<=9)
+loop
+area:=pi*r*r;
+insert into cal values(r,area);
+r:=r+1;
+end loop;
+end;
+/
+
+select * from cal;
