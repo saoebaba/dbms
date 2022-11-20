@@ -1,0 +1,32 @@
+package MYSQL;
+import java.sql.*;
+
+class MYSQL {
+
+	public static void main(String[] args) throws Exception{
+		String url="jdbc:mysql://localhost:3306/cotb58";
+		String uname="root";
+		String pass = "mysql";
+		String query1="create table test(t_id int primary key,t_name varchar(20));";
+		String query2 ="insert into test values (1,'shri'),(2,'jay');";
+		String query3 ="update test set t_name = 'newjay' where t_id =2;";
+		String query4 ="alter table test add t_address varchar(20);";
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con =DriverManager.getConnection(url,uname,pass);
+		System.out.println("Database connected !");
+		Statement st=con.createStatement();
+		st.executeUpdate(query1);
+		System.out.println("table created ");
+		st.executeUpdate(query2);
+		System.out.println("value insert succeful ");
+		st.executeUpdate(query3);
+		System.out.println("value updated");
+		st.executeUpdate(query4);
+		System.out.println("table updated ");
+		
+
+		st.close();
+		con.close();
+	}
+
+}
