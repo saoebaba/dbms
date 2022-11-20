@@ -1,0 +1,26 @@
+delimiter //
+create procedure cal_grade(in marks int,out class char(20))
+	begin
+	if marks<=1500 and marks >=990 then set class ='DIST';
+	end if;
+	if marks<=989 and marks >=900 then set class ='FC';
+	end if;
+	if marks<=899 and marks >=825 then set class ='HC';
+	end if;
+	end;
+	//
+
+-------------------------------------------------------------------------------------------
+
+
+create function find_result(roll int) returns int deterministic
+	begin
+	declare fmarks int;
+	declare grade char(20);
+	declare std_name varchar(20);
+	select student.totalmarks ,student.name into fmarks,std_name from student where student.rollno=roll;
+	call cal_grade(fmarks,@grade);
+	insert into result values(roll,std_name,@grade);
+	return roll;
+	end;
+	//
